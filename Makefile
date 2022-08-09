@@ -13,6 +13,9 @@ MAKEFLAGS+=--no-builtin-rules
 # Project settings
 
 DIR=$(shell basename $$(pwd))
+GIT_USER='plonegovbr'
+GIT_NAME='volto-dsgov-theme'
+GIT_BRANCH='main'
 ADDON ?= "@plonegovbr/volto-dsgov-theme"
 
 # Recipe snippets for reuse
@@ -27,21 +30,42 @@ YELLOW=`tput setaf 3`
 
 # Top-level targets
 
-.PHONY: project
-project:
+addon-testing-project/package.json:
 	npm install -g yo
 	npm install -g @plone/generator-volto
 	npm install -g mrs-developer
-	yo @plone/volto project --addon ${ADDON} --workspace "src/addons/${DIR}" --no-interactive
-	ln -sf $$(pwd) project/src/addons/
-	cp .project.eslintrc.js .eslintrc.js
-	cd project && yarn
+	rm -Rf addon-testing-project
+	npx -p @plone/scripts addon clone https://github.com/${GIT_USER}/${GIT_NAME}.git --branch ${GIT_BRANCH}
 	@echo "-------------------"
 	@echo "$(GREEN)Volto project is ready!$(RESET)"
-	@echo "$(RED)Now run: cd project && yarn start$(RESET)"
 
-.PHONY: all
-all: project
+.PHONY: project
+project: addon-testing-project/package.json
+	@echo "$(RED)Now run: cd addon-testing-project && yarn start$(RESET)"
+
+.PHONY: storybook
+storybook: addon-testing-project/package.json
+	@echo "$(GREEN)Create Storybook$(RESET)"
+	(cd addon-testing-project && yarn build-storybook)
+
+.PHONY: format-prettier
+format-prettier: ## Format Code with Prettier
+	yarn run prettier:fix
+
+.PHONY: format-stylelint
+format-stylelint: ## Format Code with Stylelint
+	yarn run stylelint:fix
+
+.PHONY: format
+format: format-prettier format-stylelint ## Format the codebase according to our standards
+
+.PHONY: i18n
+i18n: ## Sync i18n
+	yarn i18n
+
+.PHONY: i18n-ci
+i18n-ci: ## Check if i18n is not synced
+	yarn i18n && git diff -G'^[^\"POT]' --exit-code
 
 .PHONY: start-test-backend
 start-test-backend: ## Start Test Plone Backend
