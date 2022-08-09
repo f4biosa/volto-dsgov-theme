@@ -6,8 +6,6 @@
  * @module components
  */
 
-import SocialNetworks from "./SocialNetworks/SocialNetworks";
+import SocialNetworks from './SocialNetworks/SocialNetworks';
 
-export {
-  SocialNetworks
-};
+export { SocialNetworks };

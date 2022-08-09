@@ -20,8 +20,12 @@ const SocialNetwork = (props) => {
   const { id, href } = props;
   const icon = ICONS[id];
   return (
-    <UniversalLink href={href} openLinkInNewTab className={'social-network mr-3'}>
-      <Icon name={icon} className={"social-icon"} />
+    <UniversalLink
+      href={href}
+      openLinkInNewTab
+      className={'social-network mr-3'}
+    >
+      <Icon name={icon} className={'social-icon'} />
     </UniversalLink>
   );
 };

@@ -6,11 +6,9 @@ const SocialNetworks = (props) => {
   const { title, networks } = props;
   return (
     <div className={'col social-network'}>
-      <p className="text-up-01 text-extra-bold text-uppercase">{ title }</p>
+      <p className="text-up-01 text-extra-bold text-uppercase">{title}</p>
       {networks.map(function (network, i) {
-        return (
-          <SocialNetwork key={i} id={network.id} href={network.href} />
-        );
+        return <SocialNetwork key={i} id={network.id} href={network.href} />;
       })}
     </div>
   );
@@ -37,7 +35,7 @@ SocialNetworks.propTypes = {
  * @static
  */
 SocialNetworks.defaultProps = {
-  title: "Redes Sociais"
+  title: 'Redes Sociais',
 };
 
 export default SocialNetworks;
