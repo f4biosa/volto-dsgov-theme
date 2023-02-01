@@ -6,3 +6,5 @@ cypress/videos/
 node_modules
 project/
 results
+.package-lock.json
+src/customizations/components/theme/objetcs/

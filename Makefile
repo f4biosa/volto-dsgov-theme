@@ -13,7 +13,7 @@ MAKEFLAGS+=--no-builtin-rules
 # Project settings
 
 DIR=$(shell basename $$(pwd))
-GIT_USER='plonegovbr'
+GIT_USER='f4biosa'
 GIT_NAME='volto-dsgov-theme'
 GIT_BRANCH='main'
 ADDON ?= "@plonegovbr/volto-dsgov-theme"
