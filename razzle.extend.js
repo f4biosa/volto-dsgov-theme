@@ -10,6 +10,7 @@ const modify = (config, { target, dev }, webpack) => {
 };
 
 module.exports = {
-  plugins,
+  plugins: ['scss'],
   modify,
+
 };
