@@ -10,6 +10,34 @@ const modify = (config, { target, dev }, webpack) => {
 };
 
 module.exports = {
-  plugins,
+  plugins: [
+    ...(volto_config.plugins || {}),
+    {
+      name: 'scss',
+      options: {
+        sass: {
+          dev: {
+            sassOptions: {
+              includePaths: ['node_modules'],
+              outputStyle: 'expanded',
+              sourceMap: true,
+              quiet: true,
+              quietDeps: true,
+            },
+          },
+          prod: {
+            sassOptions: {
+              includePaths: ['node_modules'],
+              outputStyle: 'expanded',
+              sourceMap: true,
+              quiet: true,
+              quietDeps: true,
+            },
+          },
+        },
+      },
+    },
+  ],
   modify,
+
 };
