@@ -16,8 +16,15 @@
   "scripts": {
     "i18n": "rm -rf build/messages && NODE_ENV=production i18n --addon"
   },
+  "addons": [
+    "@kitconcept/volto-blocks-grid"
+  ],
   "dependencies": {
     "@govbr-ds/core": "^3.2.0",
-    "@plone/scripts": "*"
+    "@plone/scripts": "*",
+    "@kitconcept/volto-blocks-grid": "*"
+  },
+  "devDependencies": {
+    "razzle-plugin-scss": "4.2.18"
   }
 }
